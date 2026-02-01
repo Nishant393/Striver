@@ -1,32 +1,43 @@
 
-// import java.utils.*;
 public class PalindromeReorder {
 
     public static void main(String[] args) {
-        long n = 20;
-        long fact = 1;
-        int count = 0;
+        String str = "AAAACACBA";
+        int n = str.length()-1;
+        int[] freq  = new int[26] ;
+        int odd = 0,even=0;
+        int oddChar =-1 ;
+        String l ="" ,r="",m="";
 
-        for (int i = 1; i <= n; i++) {
-            fact = fact * i;
-            System.out.println(i);
+        for(int i =0 ; i<= n;i++){
+            freq[str.charAt(i) -'A']++;
         }
-        System.out.println(fact);
-        int[] arr = Long.toString(fact).chars().map(c -> c - '0').toArray();
-        // int[] charArray = fact.toArray();
-
-        for (int i = 0; i < arr.length - 1; i++) {
-            System.out.println(i + " ," + arr.length);
-            if (arr[i] == 0) {
-
-                if (arr[i] == arr[i + 1]) {
-                    count += 1;
-                } else {
-                    count = 0;
+// frequency check up
+        for(int i :freq){
+            if(i!=0){
+                if(i%2 ==0){
+                    even++;
+                }else{
+                    odd++;
+                    oddChar= i;
                 }
             }
         }
-        System.out.println(count);
+        System.err.println(odd);
+        if(odd >= 1){
+            System.out.println("possible");
+            //  left
+            for(int i =0;i<26; i++ ){
+                for(int  j=0 ; j<freq[i]/2 ;j++)
+                {
+                    l += (char)('A' + i);
+                }
+            }
 
+            l += (char)('A' + oddChar);
+            System.err.println(l);
+        }else{
+            System.out.println("NOT POSIBlE");
+        }
     }
 }
